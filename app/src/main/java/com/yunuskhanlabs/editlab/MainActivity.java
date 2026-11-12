@@ -1,6 +1,10 @@
 package com.yunuskhanlabs.editlab;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Toast;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +38,18 @@ public final class MainActivity extends Activity {
         view.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, WebResourceRequest request) {
-                return !APP_URL.equals(request.getUrl().toString());
+                Uri uri = request.getUrl();
+                String path = uri.getPath();
+                if (request.isForMainFrame() && request.hasGesture()
+                    && "https".equals(uri.getScheme()) && "github.com".equals(uri.getHost())
+                    && path != null && path.matches("/yunus-labs/edit-lab-android/releases/download/v[0-9.]+/[a-z-]+-(practice\\.zip|reference\\.mp4)")) {
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(MainActivity.this, "Download ke liye browser chahiye.", Toast.LENGTH_LONG).show();
+                    }
+                }
+                return !APP_URL.equals(uri.toString());
             }
 
             @Override

@@ -545,6 +545,16 @@
       .preview span {
         overflow-wrap: anywhere;
       }
+      .asset-link {
+        display: inline-block;
+        padding: 8px;
+        margin: 4px 2px;
+        color: #5031cd;
+        font-weight: 700;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
     </style>
   </head>
   <body>
@@ -554,7 +564,8 @@
         <nav aria-label="App navigation">
           <button data-nav="road">Roadmap</button
           ><button data-nav="saved">Saved</button
-          ><button data-nav="notes">Notes</button>
+          ><button data-nav="notes">Notes</button
+          ><button data-nav="studio">Studio</button>
         </nav>
       </div>
     </header>
@@ -1030,12 +1041,334 @@
           ? '<div class="grid">' + html + "</div>"
           : "<p>Koi project match nahi hua. Search ya filters badlo.</p>";
       }
+      const studioProjects = [
+        {
+          id: "ad-reel",
+          title: "Ad Reel · Ek product, 3 hooks",
+          format: "30–45 sec · 9:16",
+          brief:
+            "Ek bottle ya mug ke liye ad edit karo. Body same rakho aur sirf pehle 3 seconds ke teen versions banao.",
+          needs: "Trim, text overlays aur audio levels.",
+          scenes: [
+            "0:00–0:03 · Problem, result aur question wale hooks alag banao",
+            "0:03–0:12 · Product ka close-up aur naam. Text pop 0.2 sec",
+            "0:12–0:26 · Use ka demo. Action par sound cue",
+            "0:26–0:35 · Result, phir CTA ko 0.3 sec fade-in",
+          ],
+          phone: [
+            "9:16 project mein demo aur result clips pehle arrange karo.",
+            "Text aur audio lagao. CTA ko screen ke neeche wale buttons se upar rakho.",
+            "Project teen baar save ya duplicate karo. Har copy mein sirf opening clip aur line badlo.",
+            "Har export ke pehle 3 sec mute par dekho aur best hook select karo.",
+          ],
+          pc: [
+            "V1 par body cut banao aur V2 par text rakho. A1 par voice, A2 par sound cues rakho.",
+            "Timeline duplicate karke openings ko Problem, Result aur Question naam do.",
+            "SFX ko action frame par align karo. Har version mein body, duration aur CTA same rakho.",
+            "Teen MP4 exports side by side compare karo.",
+          ],
+          review: [
+            "Mute par 3 sec mein product samajh aaya",
+            "Teen hooks mein body aur CTA same hai",
+            "Text readable hai aur voice SFX ke upar hai",
+          ],
+          cover: "Bottle ka close-up aur title 3 Hooks, 1 Product",
+          caption:
+            "Ek product, teen openings. Tum pehle 3 sec mein kaunsa version dekhna chahoge?",
+        },
+        {
+          id: "long-form",
+          title: "YouTube · Long video + 2 Shorts",
+          format: "8–12 min · 16:9 + do 20–35 sec Shorts",
+          brief:
+            "Kisi simple skill ka tutorial banao. Pack ki starter clips se rough cut practice karo aur full length ke liye apni demo, examples aur voice record karo.",
+          needs: "Trim, voiceover, B-roll aur project duplicate karna.",
+          scenes: [
+            "0:00–0:20 · Result dikhao aur promise bolo. Title fade 0.3 sec",
+            "0:20–1:00 · Setup aur materials",
+            "1:00–7:00 · Teen chapters. Har chapter title 1.5 sec hold",
+            "7:00–9:00 · Galti aur fix, phir recap",
+            "Short 1 · Best result. Short 2 · Common mistake aur fix",
+          ],
+          phone: [
+            "16:9 project mein voice ya best speaking takes order mein rakho. Repeats aur lambi pauses trim karo.",
+            "Overlay par close-ups rakho, khaas kar jab voice kisi detail ka naam le.",
+            "Full video export karo. Do 9:16 projects mein ek-ek useful moment import karo.",
+            "Subject ko center mein reframe karo, subtitles sync karo aur Shorts alag export karo.",
+          ],
+          pc: [
+            "Selects timeline mein takes mark karo. Main sequence mein voice-first rough cut banao.",
+            "V2 par B-roll rakho. Chapter markers aur audio crossfades add karo.",
+            "Do vertical sequences banao. Useful ranges copy karo aur har cut ki framing check karo.",
+            "Main video 1920 × 1080, Shorts 1080 × 1920 aur tino MP4 export karo.",
+          ],
+          review: [
+            "Pehle 20 sec mein result aur video ka promise clear hai",
+            "Har Short apne aap samajh aata hai",
+            "Long cut aur dono Shorts mein voice phone speaker par clear hai",
+          ],
+          cover: "Result ka close-up aur title First Sketch in 3 Steps",
+          caption:
+            "Full tutorial mein setup, demo aur common mistake ka fix. Shorts mein dono quick takeaways.",
+        },
+        {
+          id: "podcast",
+          title: "Podcast · 2-camera sync",
+          format: "60–90 sec · 16:9",
+          brief:
+            "Do angles aur ek dialogue track sync karke conversation cut karo. Pack mein same synthetic scene ke do angles hain.",
+          needs:
+            "Do video layers ya multicam, audio waveform aur clip mute controls.",
+          scenes: [
+            "0:00–0:05 · Intro aur name label slide 0.25 sec",
+            "0:05–0:30 · Question wide angle mein",
+            "0:30–1:00 · Answer par close-up aur reaction cut",
+            "1:00–1:15 · Best quote aur end card fade 0.3 sec",
+          ],
+          phone: [
+            "Angle A ko base, Angle B ko overlay aur dialogue ko audio track par rakho.",
+            "Har file ka first clap peak zoom karke ek hi time par rakho. Camera audio mute karo.",
+            "Jahan angle B chahiye wahan overlay ka tukda rakho. Baaki jagah A dikhne do.",
+            "Start, beech aur end par lip sync check karo. Apna full exercise shoot karte waqt dono cameras ko continuous record karne do.",
+          ],
+          pc: [
+            "Audio waveform ya clap marker se Angle A, B aur dialogue sync karo.",
+            "Multicam sequence banao, ya A ko V1 aur B ko V2 par rakho. Mic ko master audio rakho.",
+            "Question par wide, answer par close-up aur natural pause par reaction cut try karo.",
+            "Har angle switch ke aas paas audio level aur lip sync check karo.",
+          ],
+          review: [
+            "Start aur end par audio sync match hai",
+            "Angle badalne par audio level jump nahi karta",
+            "Cuts speaker aur reaction ko follow karte hain",
+          ],
+          cover:
+            "Dono speakers ka split image aur title Two Angles, One Conversation",
+          caption: "Clap sync se angle switches tak, ek short podcast cut.",
+        },
+        {
+          id: "motion",
+          title: "Motion graphics · Track aur animate",
+          format: "20–30 sec · 9:16",
+          brief:
+            "Moving object ke saath label chalao aur animated name strip banao.",
+          needs: "Position aur scale keyframes. Auto tracking optional hai.",
+          scenes: [
+            "0:00–0:03 · Object introduce karo. Title scale 90% se 100% in 0.3 sec",
+            "0:03–0:16 · Text label ko object ke saath track karo",
+            "0:16–0:23 · Name strip 0.3 sec slide-in, 2 sec hold",
+            "0:23–0:26 · Clean end card",
+          ],
+          phone: [
+            "Text add karo. Object ke start par label rakho aur position keyframe tap karo.",
+            "Object jab direction badle wahan naya keyframe lagao. Beech ka playback dekho.",
+            "Name strip ke first frame ko screen se bahar aur next keyframe ko andar rakho.",
+            "Motion blur ya easing available ho to soft stop try karo. Label face ya main object ko cover na kare.",
+          ],
+          pc: [
+            "Object par tracker lagao aur result ko text position par apply karo, ya position manually keyframe karo.",
+            "Track drift wale frames manually correct karo. Object se label ka offset same rakho.",
+            "Graph editor mein ease-out lagao. Name strip ko position aur opacity se animate karo.",
+            "Frame-by-frame check karo aur text safe margins ke andar rakho.",
+          ],
+          review: [
+            "Label object ke saath rehta hai",
+            "Animation rukte waqt jerk nahi karti",
+            "Name strip aur label readable hain",
+          ],
+          cover: "Object aur label ek frame mein, title Track That Text",
+          caption: "Ek moving label aur ek lower third, keyframes se.",
+        },
+        {
+          id: "cleanup",
+          title: "Color + audio · Before / after",
+          format: "35–45 sec · 9:16 ya 16:9",
+          brief:
+            "Warm aur cool shots ko match karo. Noisy voice ko saaf karke before/after export karo.",
+          needs:
+            "White balance, exposure aur volume. Noise reduction, EQ aur scopes optional hain.",
+          scenes: [
+            "0:00–0:06 · Original shot aur noisy voice",
+            "0:06–0:18 · Matched color. Before/after label fade 0.2 sec",
+            "0:18–0:32 · Clean voice comparison. Music ko dheema rakho",
+            "0:32–0:40 · Final matched sequence",
+          ],
+          phone: [
+            "Sabse natural clip ko reference chuno. Temperature aur tint se white ya skin match karo.",
+            "Exposure aur contrast thoda adjust karo. Do shots ke beech replay karo.",
+            "Noise reduction milti hai to halka apply karo. Voice robotic lage to strength kam karo.",
+            "Phone speaker aur headphones par before/after ko same loudness par compare karo.",
+          ],
+          pc: [
+            "Reference still save karo. Waveform ya RGB parade available ho to shadows aur highlights compare karo.",
+            "Correction pehle lagao, creative look alag effect par rakho.",
+            "Dialogue gain set karo, low rumble ke liye high-pass try karo, phir halka noise reduction.",
+            "Meters par clipping check karo. Before/after ko same volume par export karo.",
+          ],
+          review: [
+            "Cut par color achanak nahi badalta",
+            "Voice clear hai aur cleanup se metallic nahi lagti",
+            "Before/after dono same volume par compare hue",
+          ],
+          cover: "Half warm, half corrected frame aur title Before / After",
+          caption:
+            "White balance, shot match aur dialogue cleanup ka side-by-side.",
+        },
+        {
+          id: "client",
+          title: "Client simulation · Brief se delivery",
+          format: "30–45 sec · 9:16 + 16:9",
+          brief:
+            "Practice client ke liye ek short promo banao. Kisi dost se timestamp ke saath review lo.",
+          needs: "Project versions, captions, export aur file management.",
+          scenes: [
+            "0:00–0:04 · Audience ki problem",
+            "0:04–0:18 · Demo aur benefit. Title fade 0.3 sec",
+            "0:18–0:30 · Proof ya result",
+            "0:30–0:40 · Action line aur end card",
+          ],
+          phone: [
+            "Brief mein audience, goal, duration aur dono ratios likho.",
+            "V1 export karo. Reviewer se teen timestamps aur ek specific change per timestamp lo.",
+            "Project duplicate karo. Feedback apply karke vertical aur horizontal framing alag check karo.",
+            "Files Promo_V2_9x16.mp4 aur Promo_V2_16x9.mp4 naam se save karo. Ek change note saath rakho.",
+          ],
+          pc: [
+            "Footage, audio, project aur delivery folders banao. Brief aur script project ke paas rakho.",
+            "V1 review MP4 export karo. Timestamp notes ko timeline markers mein convert karo.",
+            "V2 duplicate karo, changes apply karo aur captions ko dono ratios mein check karo.",
+            "Dono masters export karo. Project reopen karke media links aur file names verify karo.",
+          ],
+          review: [
+            "Dono exports brief ki duration aur ratio follow karte hain",
+            "Teen timestamp notes ka result change log mein hai",
+            "Dono MP4s open hote hain aur CTA readable hai",
+          ],
+          cover: "Result shot aur title Brief to Final Cut",
+          caption:
+            "Ek practice brief, do deliverables aur feedback ke baad V2.",
+        },
+      ];
+      const studioBase =
+        "https://github.com/yunus-labs/edit-lab-android/releases/download/v1.1.0/";
+      let studioIndex = 0;
+      let studioScores = {};
+      try {
+        const stored = JSON.parse(
+          localStorage.getItem("edit-lab-studio-v1") || "{}",
+        );
+        if (stored && typeof stored === "object") studioScores = stored;
+      } catch {}
+      function studioKey(project) {
+        return track + "-" + project.id;
+      }
+      function studioScore(project) {
+        const value = studioScores[studioKey(project)];
+        return Array.isArray(value) ? value : [];
+      }
+      function studioCount(project) {
+        return project.review.filter((_, i) => studioScore(project)[i] === true)
+          .length;
+      }
+      function studioView() {
+        return (
+          '<div class="section"><h2>Advanced Studio</h2></div><p class="muted">Chhe real editing briefs. Apna footage shoot karo ya original practice media se technique try karo.</p><div class="grid">' +
+          studioProjects
+            .map(
+              (p, i) =>
+                '<article class="card"><div class="meta"><small>STUDIO ' +
+                (i + 1) +
+                '</small><span class="status">' +
+                studioCount(p) +
+                " / " +
+                p.review.length +
+                " checks</span></div><h3>" +
+                p.title +
+                "</h3><p>" +
+                p.format +
+                '</p><button class="primary" data-studio="' +
+                i +
+                '">Brief kholo →</button></article>',
+            )
+            .join("") +
+          "</div>"
+        );
+      }
+      function studioLesson() {
+        const p = studioProjects[studioIndex];
+        const list = (items, tag) =>
+          "<" +
+          tag +
+          ' class="steps">' +
+          items.map((x) => "<li>" + x + "</li>").join("") +
+          "</" +
+          tag +
+          ">";
+        return (
+          '<section class="panel"><button data-nav="studio">← Advanced Studio</button><h1>' +
+          p.title +
+          "</h1><p>" +
+          p.format +
+          " · " +
+          trackName() +
+          "</p><p>" +
+          p.brief +
+          "</p><p><strong>Editor mein chahiye</strong> · " +
+          p.needs +
+          "</p>" +
+          "<details open><summary>1. Storyboard aur text timing</summary>" +
+          list(p.scenes, "ul") +
+          "</details>" +
+          "<details open><summary>2. " +
+          trackName() +
+          " editing steps</summary>" +
+          list(p[track], "ol") +
+          "</details>" +
+          '<details open><summary>3. Practice media aur reference</summary><p>GitHub se download ke liye internet chahiye. ZIP mein raw starter clips aur sample edit hain. Full project ke liye apne shots add karo.</p><p><a class="asset-link" href="' +
+          studioBase +
+          p.id +
+          '-practice.zip">Practice pack ZIP ↓</a> <a class="asset-link" href="' +
+          studioBase +
+          p.id +
+          '-reference.mp4">Reference MP4 ↓</a></p></details>' +
+          "<details><summary>4. Thumbnail aur post caption</summary><p><strong>Thumbnail</strong> · " +
+          p.cover +
+          "</p><p><strong>Caption</strong> · " +
+          p.caption +
+          "</p></details>" +
+          "<details open><summary>5. Export aur self-review</summary><p>MP4, 30 fps. Vertical 1080 × 1920 ya horizontal 1920 × 1080. Exported file poori dekho aur har passed check tick karo.</p>" +
+          p.review
+            .map(
+              (x, i) =>
+                '<label class="check"><input type="checkbox" data-studio-check="' +
+                i +
+                '"' +
+                (studioScore(p)[i] === true ? " checked" : "") +
+                "> " +
+                x +
+                "</label>",
+            )
+            .join("") +
+          '<strong id="studio-score" role="status">' +
+          studioCount(p) +
+          " / " +
+          p.review.length +
+          " checks passed</strong></details></section>"
+        );
+      }
+
       function render() {
         clearInterval(timer);
         timer = null;
         at = 0;
         document.querySelectorAll("[data-nav]").forEach((b) => {
-          const active = b.dataset.nav === (view === "lesson" ? "road" : view);
+          const active =
+            b.dataset.nav ===
+            (view === "lesson"
+              ? "road"
+              : view === "studio-lesson"
+                ? "studio"
+                : view);
           b.classList.toggle("active", active);
           if (active) b.setAttribute("aria-current", "page");
           else b.removeAttribute("aria-current");
@@ -1119,6 +1452,8 @@
               '<div class="panel">Kisi project ko kholo aur apna pehla note likho.</div>');
         }
         if (view === "lesson") body = lesson(current);
+        if (view === "studio") body = studioView();
+        if (view === "studio-lesson") body = studioLesson();
         const switcher =
           '<section class="device" aria-label="Editing device"><div><strong>Kis par edit karoge?</strong><div class="muted">Har track ka progress alag save hota hai.</div></div><div class="device-buttons"><button data-track="phone" aria-pressed="' +
           (track === "phone") +
@@ -1434,6 +1769,11 @@
           go(view === "lesson" ? "road" : view);
           return;
         }
+        if (b.dataset.studio !== undefined) {
+          studioIndex = Number(b.dataset.studio);
+          go("studio-lesson");
+          return;
+        }
         if (b.dataset.nav) {
           go(b.dataset.nav);
           return;
@@ -1524,6 +1864,29 @@
         }
       });
       document.addEventListener("change", (e) => {
+        const check = e.target.dataset.studioCheck;
+        if (check !== undefined) {
+          const project = studioProjects[studioIndex];
+          const score = studioScore(project);
+          score[Number(check)] = e.target.checked;
+          studioScores[studioKey(project)] = score;
+          const label =
+            studioCount(project) +
+            " / " +
+            project.review.length +
+            " checks passed";
+          try {
+            localStorage.setItem(
+              "edit-lab-studio-v1",
+              JSON.stringify(studioScores),
+            );
+            $("#studio-score").textContent = label;
+          } catch {
+            $("#studio-score").textContent = label + " · save nahi hua";
+          }
+          return;
+        }
+
         const x = e.target;
         if (x.id === "level" || x.id === "status") {
           filters[x.id] = x.value;
