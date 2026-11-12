@@ -4,7 +4,7 @@ A Hinglish video-editing practice roadmap with Phone and PC tracks, 16 projects 
 
 ## Install
 
-Download **Edit-Lab.apk** from [Releases](https://github.com/yunuskhanlabs/edit-lab-android/releases/latest). Open it on Android 6.0 or later. Android may ask you to allow installation from the browser or file manager used to open the APK. Edit Lab uses Android System WebView and has no Internet permission. Progress is saved on the device.
+Download **Edit-Lab.apk** from [Releases](https://github.com/yunus-labs/edit-lab-android/releases/latest). Open it on Android 6.0 or later. Android may ask you to allow installation from the browser or file manager used to open the APK. Edit Lab uses Android System WebView and has no Internet permission. Progress is saved on the device.
 
 ## Build on Windows
 

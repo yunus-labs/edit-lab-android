@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowInsets;
+import android.widget.FrameLayout;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
@@ -41,8 +42,11 @@ public final class MainActivity extends Activity {
                 return new WebResourceResponse("text/plain", "UTF-8", new ByteArrayInputStream(new byte[0]));
             }
         });
+        FrameLayout root = new FrameLayout(this);
+        root.setBackgroundColor(Color.WHITE);
+        root.addView(view, new FrameLayout.LayoutParams(-1, -1));
         if (Build.VERSION.SDK_INT >= 30) {
-            view.setOnApplyWindowInsetsListener((content, insets) -> {
+            root.setOnApplyWindowInsetsListener((content, insets) -> {
                 android.graphics.Insets padding = insets.getInsets(
                     WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout()
                     | WindowInsets.Type.ime());
@@ -50,7 +54,8 @@ public final class MainActivity extends Activity {
                 return insets;
             });
         }
-        setContentView(view);
+        setContentView(root);
+        root.requestApplyInsets();
         try (InputStream html = getAssets().open("index.html")) {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             byte[] chunk = new byte[4096];
