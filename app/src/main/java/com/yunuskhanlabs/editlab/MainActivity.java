@@ -1,0 +1,66 @@
+package com.yunuskhanlabs.editlab;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.WindowInsets;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.IOException;
+
+public final class MainActivity extends Activity {
+    private static final String APP_URL = "https://edit-lab.local/index.html";
+
+    @Override
+    protected void onCreate(Bundle state) {
+        super.onCreate(state);
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().setNavigationBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(8192 | 16);
+        WebView view = new WebView(this);
+        view.getSettings().setJavaScriptEnabled(true);
+        view.getSettings().setDomStorageEnabled(true);
+        view.getSettings().setAllowFileAccess(false);
+        view.getSettings().setAllowContentAccess(false);
+        view.getSettings().setBlockNetworkLoads(true);
+        view.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView webView, WebResourceRequest request) {
+                return !APP_URL.equals(request.getUrl().toString());
+            }
+
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView webView, WebResourceRequest request) {
+                return new WebResourceResponse("text/plain", "UTF-8", new ByteArrayInputStream(new byte[0]));
+            }
+        });
+        if (Build.VERSION.SDK_INT >= 30) {
+            view.setOnApplyWindowInsetsListener((content, insets) -> {
+                android.graphics.Insets padding = insets.getInsets(
+                    WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout()
+                    | WindowInsets.Type.ime());
+                content.setPadding(padding.left, padding.top, padding.right, padding.bottom);
+                return insets;
+            });
+        }
+        setContentView(view);
+        try (InputStream html = getAssets().open("index.html")) {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] chunk = new byte[4096];
+            int length;
+            while ((length = html.read(chunk)) != -1) {
+                buffer.write(chunk, 0, length);
+            }
+            view.loadDataWithBaseURL(APP_URL, buffer.toString("UTF-8"), "text/html", "UTF-8", APP_URL);
+        } catch (IOException e) {
+            throw new IllegalStateException("Missing bundled Edit Lab page", e);
+        }
+    }
+}

@@ -1,0 +1,1552 @@
+<!doctype html>
+<html lang="hi-Latn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Edit Lab — Video Editing Practice</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f7f7fb;
+        color: #19182a;
+        font:
+          16px system-ui,
+          sans-serif;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button,
+      select {
+        cursor: pointer;
+      }
+      button {
+        border: 1px solid #deddea;
+        background: white;
+        color: inherit;
+        padding: 10px 14px;
+        border-radius: 9px;
+        font-weight: 700;
+      }
+      button:hover {
+        border-color: #7153ed;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid #836cff;
+        outline-offset: 3px;
+      }
+      header {
+        background: white;
+        border-bottom: 1px solid #e9e8f1;
+      }
+      .bar,
+      main {
+        max-width: 1180px;
+        margin: auto;
+        padding: 0 24px;
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 74px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 22px;
+      }
+      .logo {
+        display: grid;
+        place-items: center;
+        width: 37px;
+        height: 37px;
+        background: #6e4bf5;
+        color: white;
+        border-radius: 10px;
+      }
+      nav {
+        display: flex;
+        gap: 6px;
+      }
+      nav button {
+        border-color: transparent;
+      }
+      .active {
+        background: #efebff;
+        color: #5031cd;
+      }
+      main {
+        padding-bottom: 50px;
+      }
+      .hero {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: 1.65fr 1fr;
+        align-items: center;
+        gap: 28px;
+        background: #1c1735;
+        color: white;
+        border-radius: 22px;
+        padding: 40px;
+        overflow: hidden;
+        background-image: radial-gradient(
+          ellipse at 95% 25%,
+          #483382,
+          transparent 65%
+        );
+      }
+      .eyebrow,
+      small,
+      .time {
+        font:
+          700 12px Consolas,
+          monospace;
+        letter-spacing: 0.05em;
+      }
+      .eyebrow {
+        color: #c0adff;
+      }
+      h1 {
+        font-size: clamp(38px, 6vw, 68px);
+        letter-spacing: -0.065em;
+        line-height: 0.99;
+        margin: 15px 0;
+      }
+      h1 span {
+        color: #bca7ff;
+      }
+      .hero p {
+        color: #ddd6f4;
+        max-width: 470px;
+      }
+      .primary {
+        background: #6844ed;
+        color: white;
+        border-color: #6844ed;
+      }
+      .hero .primary {
+        background: #caff83;
+        color: #1f3020;
+        border-color: #caff83;
+      }
+      .art {
+        min-width: 0;
+        border: 1px solid #7864a8;
+        border-radius: 14px;
+        background: #292043;
+        padding: 13px;
+        box-shadow: 0 12px 36px #110d29a0;
+        transform: rotate(3deg);
+      }
+      .art small {
+        color: #d3c4ff;
+      }
+      .screen {
+        height: 125px;
+        display: grid;
+        place-items: center;
+        background: #17132a;
+        border-radius: 7px;
+        margin: 9px 0;
+      }
+      .frame {
+        background: #fff;
+        color: #1c1735;
+        width: 60px;
+        height: 106px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.05;
+      }
+      .tracks {
+        display: grid;
+        gap: 5px;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent 0 19%,
+          #55476e 19% 20%
+        );
+      }
+      .tracks b {
+        font: 11px monospace;
+        border-radius: 4px;
+        background: #9e7eff;
+        color: #1b1234;
+        padding: 5px;
+      }
+      .tracks b:nth-child(2) {
+        width: 60%;
+        margin-left: 18%;
+        background: #edbfff;
+      }
+      .tracks b:nth-child(3) {
+        width: 86%;
+        background: #caff83;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 12px;
+        margin: 16px 0 32px;
+      }
+      .stat,
+      .card,
+      .panel {
+        background: white;
+        border: 1px solid #e8e6f0;
+        border-radius: 14px;
+        padding: 17px;
+      }
+      .stat strong {
+        font-size: 24px;
+        display: block;
+      }
+      .stat span,
+      .muted {
+        color: #5e5a72;
+      }
+      .progress {
+        height: 7px;
+        background: #eeebf7;
+        border-radius: 10px;
+        margin-top: 8px;
+        overflow: hidden;
+      }
+      .progress b {
+        display: block;
+        height: 100%;
+        background: #7955f7;
+      }
+      .section {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 15px;
+        margin: 26px 0 14px;
+      }
+      .section h2 {
+        margin: 0;
+        font-size: 30px;
+        letter-spacing: -0.04em;
+      }
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid #deddea;
+        background: white;
+        color: inherit;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      textarea {
+        width: 100%;
+        resize: vertical;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .cover {
+        height: 100px;
+        border-radius: 9px;
+        display: grid;
+        place-items: center;
+        color: #30225a;
+        font-size: 33px;
+        background: repeating-linear-gradient(
+          135deg,
+          #ede6ff 0 15px,
+          #e8dfff 15px 16px
+        );
+      }
+      .card:nth-child(3n + 2) .cover {
+        background: #e0f4cc;
+        color: #334e29;
+      }
+      .card:nth-child(3n) .cover {
+        background: #ffe4ee;
+        color: #6d344c;
+      }
+      .card h3 {
+        margin: 8px 0 0;
+        font-size: 21px;
+      }
+      .card p {
+        margin: 8px 0 13px;
+        flex: 1;
+      }
+      .meta,
+      .actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 7px;
+      }
+      .meta {
+        margin-top: 12px;
+        color: #5540a0;
+      }
+      .status {
+        font-size: 12px;
+        background: #f0edf8;
+        border-radius: 20px;
+        padding: 4px 8px;
+      }
+      .done {
+        background: #e5f5d7;
+        color: #365f23;
+      }
+      .panel {
+        margin: 16px 0;
+      }
+      .lesson {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 15px;
+      }
+      .lesson h1 {
+        font-size: clamp(32px, 5vw, 52px);
+      }
+      details {
+        border-bottom: 1px solid #ebe8f2;
+        padding: 12px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 800;
+      }
+      .steps li {
+        margin: 9px 0;
+      }
+      .scene {
+        display: grid;
+        grid-template-columns: 85px 1fr;
+        gap: 8px;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .time {
+        color: #5c3ac9;
+      }
+      label.check {
+        display: flex;
+        align-items: start;
+        gap: 8px;
+        margin: 10px 0;
+      }
+      input[type="checkbox"] {
+        accent-color: #6844ed;
+      }
+      .preview {
+        aspect-ratio: 9/16;
+        width: min(100%, 180px);
+        margin: 12px auto;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 12px;
+        background: white;
+        border: 1px solid #deddea;
+        border-radius: 13px;
+        color: #171326;
+        font-size: 22px;
+        font-weight: 800;
+        overflow: hidden;
+      }
+      .preview-controls {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+      }
+      .preview-controls input {
+        width: 100%;
+        padding: 0;
+      }
+      .sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 780px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .section {
+          align-items: start;
+          flex-direction: column;
+        }
+        .hero {
+          padding: 27px;
+        }
+        .lesson {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 520px) {
+        .bar,
+        main {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+        .bar {
+          flex-wrap: wrap;
+          padding-top: 10px;
+          padding-bottom: 8px;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 22px;
+        }
+        .art {
+          transform: none;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .stats {
+          gap: 6px;
+        }
+        .stat {
+          padding: 9px;
+          font-size: 12px;
+        }
+        .filters input {
+          width: 100%;
+        }
+      }
+
+      .device {
+        margin-top: 22px;
+        padding: 14px 18px;
+        border: 1px solid #e8e6f0;
+        border-radius: 14px;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .device .muted {
+        font-size: 13px;
+      }
+      .device-buttons {
+        display: flex;
+        background: #f0edf7;
+        padding: 4px;
+        gap: 4px;
+        border-radius: 10px;
+      }
+      .device-buttons button {
+        border-color: transparent;
+        background: transparent;
+        min-width: 70px;
+      }
+      .device-buttons button[aria-pressed="true"] {
+        background: #6844ed;
+        color: white;
+      }
+      .device + .hero {
+        margin-top: 14px;
+      }
+      .part {
+        margin: 0 0 24px;
+      }
+      .part-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 10px;
+        padding: 11px 14px;
+        border-left: 4px solid #7955f7;
+        background: #eeebfa;
+        border-radius: 8px;
+      }
+      .part-head h3,
+      .part-head p {
+        margin: 0;
+      }
+      .part-head p {
+        font-size: 13px;
+        color: #5e5a72;
+      }
+      .part-head .status {
+        white-space: nowrap;
+        background: white;
+      }
+      .part .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .part .actions {
+        flex-wrap: wrap;
+      }
+      @media (max-width: 960px) {
+        .part .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .part .grid {
+          grid-template-columns: 1fr;
+        }
+        .device {
+          padding: 10px;
+        }
+        .device-buttons button {
+          min-width: 0;
+          padding: 8px;
+        }
+      }
+      #idea {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      #idea input {
+        flex: 1;
+        min-width: 0;
+      }
+      .panel p {
+        overflow-wrap: anywhere;
+      }
+      .preview span {
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="bar">
+        <div class="brand"><span class="logo">▶</span>Edit Lab</div>
+        <nav aria-label="App navigation">
+          <button data-nav="road">Roadmap</button
+          ><button data-nav="saved">Saved</button
+          ><button data-nav="notes">Notes</button>
+        </nav>
+      </div>
+    </header>
+    <main id="app"></main>
+    <script>
+      const core = [
+        [
+          "Clean White • Mera Pehla Video",
+          "Beginner",
+          "Basics",
+          36,
+          "9:16",
+          "Pencil, notebook aur white paper",
+          "3 cheezein. 1 clean video.",
+          "Ek pencil lo|Notebook kholo|Ek idea likho|Page ko clean frame mein dikhao",
+          "White paper ko window ke paas rakho. Pencil aur notebook ki chhoti clips shoot karo.",
+          "Har clip ke edges se extra part trim karo. Text black rakho aur center mein rakho.",
+          "Clean White Edit",
+          "Mera pehla 36-sec edit. Aaj bas trim aur text practice kiya.",
+        ],
+        [
+          "Jump Cut Se Mini Reel",
+          "Beginner",
+          "Instagram Reels",
+          30,
+          "9:16",
+          "Paani ki bottle aur desk",
+          "Desk reset in 30 seconds",
+          "Before shot|Bottle hatao|Desk saaf karo|After shot",
+          "Phone ko ek jagah tikakar before aur after same angle se shoot karo.",
+          "Haath frame mein aate hi cut karo. Silent gaps hatao aur before/after match dekho.",
+          "Desk Reset",
+          "Ek angle, chaar cuts. Desk reset ka before aur after.",
+        ],
+        [
+          "Bolti Reel, Clear Captions",
+          "Beginner",
+          "Instagram Reels",
+          32,
+          "9:16",
+          "Phone mic aur ek simple tip",
+          "Phone steady kaise rakhein?",
+          "Problem dikhao|Books stack karo|Phone tikao|Final shot dekho",
+          "Shaant room mein ek-ek line bolo. Har line ke baad ek second ruk jao.",
+          "Captions ko speech ke start par rakho. Auto captions use karo to spelling khud check karo.",
+          "Steady Phone Trick",
+          "Books se phone steady karne ka simple setup.",
+        ],
+        [
+          "Beat Par B-roll",
+          "Beginner",
+          "Instagram Reels",
+          32,
+          "9:16",
+          "Mug, spoon aur apna tapping audio",
+          "Chai ki chaar beats",
+          "Mug rakho|Spoon ghumaao|Steam ka close-up|Final cup",
+          "Apni tapping record karo. Wide, medium aur close-up angle se clip lo.",
+          "Waveform mein tap ke peaks dekho. Har section ka pehla cut paas wali beat par snap karo.",
+          "Chai in 4 Beats",
+          "Ek cup, chaar angles aur apni record ki hui beat.",
+        ],
+        [
+          "YouTube Short • Chhoti Story",
+          "Intermediate",
+          "YouTube Shorts",
+          36,
+          "9:16",
+          "Paper aur pencil",
+          "Galti se better sketch",
+          "Galat line|Eraser lo|Line dobara banao|Sketch reveal",
+          "Opening ke liye galti ka close-up aur ending ke liye poora sketch shoot karo.",
+          "Pehle result ki jhalak dikhao, phir problem par cut karo. Reveal se pehle aadha second hold karo.",
+          "Sketch Fix",
+          "Ek galat line se shuru hua 36-second sketch fix.",
+        ],
+        [
+          "YouTube • Pehla Horizontal Video",
+          "Intermediate",
+          "YouTube",
+          60,
+          "16:9",
+          "Book, desk aur phone mic",
+          "Reading corner setup",
+          "Final corner preview|Light set karo|Book aur phone rakho|Setup recap",
+          "Phone sideways rakho aur four wide shots lo. Har action ka ek close-up bhi lo.",
+          "Wide shot par voiceover shuru karo, phir haath ka close-up lagao. Background audio dheema karo.",
+          "Reading Corner Setup",
+          "Ek minute mein simple reading corner. Light, angle aur setup.",
+        ],
+        [
+          "Moving Words • Keyframes",
+          "Intermediate",
+          "Kinetic Typography",
+          32,
+          "9:16",
+          "Apni voice recording",
+          "Ruko. Socho. Shuru karo.",
+          "RUKO|SOCHO|EK STEP|SHURU KARO",
+          "Har word ko alag beat par bolo. Playback se word start ka time note karo.",
+          "Position ke do keyframes lagao. Pehla neeche, doosra center. Ease out lagao taaki word softly ruke.",
+          "Words in Motion",
+          "Aaj chaar words ko voice ke saath move karaya.",
+        ],
+        [
+          "Mask Reveal • Text Ke Peeche",
+          "Intermediate",
+          "Kinetic Typography",
+          32,
+          "9:16",
+          "Paper strip aur plain background",
+          "Text ko hide aur reveal karo",
+          "Blank screen|Strip aati hai|Word reveal|Clean end card",
+          "Paper strip ko ek direction mein dheere slide karke shoot karo.",
+          "Text layer par rectangular mask lagao. Mask ki edge ko strip ke saath keyframe karo.",
+          "Behind the Strip",
+          "Ek paper strip se simple mask reveal.",
+        ],
+        [
+          "Product Reel • Light aur Color",
+          "Advanced",
+          "Instagram Reels",
+          36,
+          "9:16",
+          "Plain bottle aur window light",
+          "Same bottle, teen angles",
+          "Hero close-up|Side light|Label detail|Product end card",
+          "Exposure lock karo aur bottle ko window se same distance par rakho.",
+          "Pehle white balance match karo, phir exposure. Before/after toggle se skin ya whites ka color check karo.",
+          "Bottle in Focus",
+          "Window light se banaya mini product Reel.",
+        ],
+        [
+          "YouTube • Voiceover aur Sound",
+          "Advanced",
+          "YouTube",
+          80,
+          "16:9",
+          "Notebook, mic aur room tone",
+          "Ek page ka plan",
+          "Result preview|Blank page|Plan bharna|Final walkthrough",
+          "Script ke chaar parts alag record karo. Room ki 10 sec silence bhi record karo.",
+          "Voice ko pehle assemble karo. Agle shot ki audio picture cut se 0.3 sec pehle laao. Gaps mein room tone rakho.",
+          "One Page Plan",
+          "Ek page par plan banana, voiceover aur close-ups ke saath.",
+        ],
+        [
+          "Typography • Fast, Slow, Hold",
+          "Advanced",
+          "Kinetic Typography",
+          36,
+          "9:16",
+          "Apna spoken phrase aur click audio",
+          "Speed se meaning badlo",
+          "FAST|SLOW|HOLD|GO",
+          "Voice mein FAST jaldi aur SLOW lamba bolo. Click ko visual beat ke liye record karo.",
+          "FAST ko 0.15 sec mein lao, SLOW ko 0.6 sec. HOLD ko bina motion rakho. GO par motion aur click sync karo.",
+          "Fast Slow Hold Go",
+          "Chaar words, chaar motion choices.",
+        ],
+        [
+          "Final Project • One Story, Two Edits",
+          "Advanced",
+          "Capstone",
+          36,
+          "9:16 + 16:9",
+          "Week 1–11 ki favourite skill aur apna footage",
+          "Ek story, do screens",
+          "Hook preview|Problem|Process|Result + CTA",
+          "Same action vertical aur horizontal dono mein shoot karo. Pehle shot list mein har angle mark karo.",
+          "36-sec vertical edit banao. Uski 60-sec horizontal version mein process detail add karo. Reframe, captions aur audio dono files mein check karo.",
+          "One Story, Two Screens",
+          "Same story ko Reel aur YouTube ke liye do alag cuts mein edit kiya.",
+        ],
+      ];
+      const pro = [
+        [
+          "YouTube • Long-form Story Edit",
+          "Pro",
+          "YouTube",
+          180,
+          "16:9",
+          "Apne hobby ka footage aur 1-page script",
+          "3 minute mein ek skill",
+          "Result preview|Problem samjhao|Demo ka pehla part|Common mistake aur fix",
+          "Script mein hook, setup, demo aur payoff likho. Har part ke liye ek wide aur ek close-up shot lo.",
+          "Pehle sirf voice aur zaroori visuals ka rough cut banao. Phir repeat lines hatao. Viewer ko har 20–30 sec mein naya visual ya useful detail do. Ek dost se poochho ki kis point par story unclear hui, aur us section ko recut karo.",
+          "One Skill in 3 Minutes",
+          "Ek skill ko result, demo aur common mistake ke saath explain kiya.",
+        ],
+        [
+          "Color Grading • Shot Match",
+          "Pro",
+          "Color",
+          40,
+          "9:16",
+          "Same subject ke window aur indoor shots",
+          "Do lights, ek look",
+          "Reference shot|Indoor shot correct karo|Window shot match karo|Before aur after",
+          "Subject ko dono lights mein record karo aur har clip mein white paper ki jhalak lo.",
+          "Ek reference shot chuno. White balance, brightness aur contrast isi order mein match karo. Skin aur whites check karo. Phir halka creative look lagao. Before/after bana kar teen cut points par color jump check karo.",
+          "One Consistent Look",
+          "Mixed lighting ko match karke ek consistent look banaya.",
+        ],
+        [
+          "Sound Design • Apni Foley Record Karo",
+          "Pro",
+          "Audio",
+          45,
+          "9:16",
+          "Keys, door, footsteps aur phone mic",
+          "Sirf sound se mood badlo",
+          "Room tone|Keys ka close-up|Footsteps aur door|Quiet ending",
+          "Video shoot karo. Phir keys, steps aur door ki awaz alag se teen baar record karo.",
+          "Dialogue, ambience aur effects ko alag layers par rakho. Waveform dekhkar sound ko action frame par align karo. Fade se joins smooth karo. Voice ko effects ke upar rakho. Headphones aur phone speaker dono par suno.",
+          "Hear the Scene",
+          "Apni recorded Foley se ek simple scene ka mood badla.",
+        ],
+        [
+          "Client Brief • Edit, Feedback, Delivery",
+          "Pro",
+          "Portfolio",
+          45,
+          "9:16 + 16:9",
+          "Apna footage aur ek reviewer",
+          "Ek brief, do final versions",
+          "Client ka goal|Product ya idea ka demo|Proof ya result|Clear call to action",
+          "Practice brief likho. Audience, message, duration aur deliverables tay karo. Footage, audio aur exports ke folders banao.",
+          "V1 export karo. Reviewer se timecode ke saath 3 feedback points lo. V2 mein unhe apply karo aur change list likho. Vertical aur horizontal cuts ko alag review karo. File names mein ratio aur version likho.",
+          "Brief to Final Cut",
+          "Ek practice brief, do edits aur feedback ke baad final delivery.",
+        ],
+      ];
+      const pcPractice = [
+        [
+          "Timeline zoom se pehle video ko poora fit karo. Clip select karke blade ya split tool se trim karo. Text ko video ke upar wali track par rakho.",
+          "36 sec, white background aur black text.",
+        ],
+        [
+          "Before aur after ko V1 par rakho. Ripple Delete ya gap remove se beech ka blank space hatao. Action ke beech cut ko ek frame aage ya peeche karke compare karo.",
+          "Before/after cut par object jump check karo.",
+        ],
+        [
+          "Voice waveform zoom karo. Captions track ya text clips banao. Har line ko waveform par bolne ke saath align karo.",
+          "Audio mute karke bhi story samajh aani chahiye.",
+        ],
+        [
+          "Beat ki waveform peak par timeline marker rakho. Clips ko markers par split karo. Playback mein har cut ki rhythm check karo.",
+          "Chaar clean beat cuts.",
+        ],
+        [
+          "Footage ko Wide, Close-up aur Reveal bins mein rakho. Ripple trim se story tight karo aur B-roll ko V2 par rakho.",
+          "Hook 4 sec ke andar clear ho.",
+        ],
+        [
+          "16:9 sequence banao. Voice A1 par aur B-roll V2 par rakho. Cutaway mein audio ko linked clip se alag trim karo.",
+          "60 sec horizontal MP4.",
+        ],
+        [
+          "Inspector mein Position aur Scale ke keyframes set karo. Graph ya easing controls se start aur stop smooth karo.",
+          "Har word voice ke saath aaye.",
+        ],
+        [
+          "Text ke upar foreground layer rakho. Mask ya matte ke edge ko frame by frame verify karo aur position animate karo.",
+          "Reveal ke pehle text hidden rahe.",
+        ],
+        [
+          "Agar editor mein scopes hain, waveform se dark aur bright areas compare karo. Reference still ke against teen shots match karo.",
+          "Whites neutral aur details visible.",
+        ],
+        [
+          "Voice, room tone aur music ko separate tracks do. Audio meters par clipping check karo. Audio edit ke neeche chhota crossfade lagao.",
+          "Laptop speaker par narration clear ho.",
+        ],
+        [
+          "Keyframe graph mein fast aur slow curves compare karo. HOLD par do identical values rakho. Click ko GO ke first moving frame par rakho.",
+          "Chaar alag motion choices.",
+        ],
+        [
+          "Sequence duplicate karo. Horizontal copy ko 1920 × 1080 banao aur position, scale aur text placement shot by shot set karo.",
+          "Dono exports ko open karke dekho.",
+        ],
+        [
+          "Radio edit banao, yaani pehle voice-only story arrange karo. Sequence ki V1 copy save karo aur reviewer feedback ke baad V2 banao.",
+          "180-sec video aur ek revised cut.",
+        ],
+        [
+          "Reference still save karo. Correction aur creative look ko separate effects ya nodes mein rakho. Scopes available hon to brightness aur tint compare karo.",
+          "Teen matching shots aur before/after.",
+        ],
+        [
+          "Dialogue, Foley aur ambience track groups banao. Clip gain se loud hits control karo, phir track faders se mix balance karo.",
+          "Phone aur headphone dono par final mix.",
+        ],
+        [
+          "Project folder collect karo. Media relink test karo aur do sequences ke output queue banao. Deliverables folder mein MP4 aur feedback notes rakho.",
+          "Dono ratios, V2 files aur organized project.",
+        ],
+      ];
+
+      const lessons = [...core, ...pro];
+      const parts = [
+        [
+          "Beginner",
+          "Part 1 · Bilkul zero se",
+          "Record, import, trim aur captions",
+        ],
+        [
+          "Intermediate",
+          "Part 2 · Story aur motion",
+          "YouTube formats, keyframes aur masks",
+        ],
+        [
+          "Advanced",
+          "Part 3 · Polished edits",
+          "Color, sound, typography aur reframing",
+        ],
+        [
+          "Pro",
+          "Part 4 · Portfolio practice",
+          "Long-form, grading, Foley aur client delivery",
+        ],
+      ];
+      let track = "phone";
+      try {
+        if (localStorage.getItem("edit-lab-device") === "pc") track = "pc";
+      } catch {}
+      const key = (i) => (track === "phone" ? i : "pc-" + i);
+      const trackName = () => (track === "phone" ? "Phone" : "PC");
+      const checks = [
+        "Sahi canvas size aur frame rate set hai",
+        "Text readable hai aur screen edges se door hai",
+        "Audio clear hai aur voice music se upar hai",
+        "Export ki hui MP4 ko video player mein start se end tak dekha",
+      ];
+      const levels = parts.map(([level]) => level);
+      const $ = (s) => document.querySelector(s);
+      const esc = (s) =>
+        String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const data = { done: {}, saved: {}, notes: {}, checks: {}, ideas: [] };
+      const record = (value) =>
+        value !== null && typeof value === "object" && !Array.isArray(value);
+      try {
+        const saved = JSON.parse(localStorage.getItem("edit-lab-v1") || "{}");
+        if (record(saved)) {
+          for (const field of ["done", "saved", "notes", "checks"]) {
+            if (!record(saved[field])) continue;
+            for (let i = 0; i < lessons.length; i++) {
+              for (const id of [String(i), "pc-" + i]) {
+                const value = saved[field][id];
+                if (field === "notes" && typeof value === "string")
+                  data.notes[id] = value;
+                if (
+                  (field === "done" || field === "saved") &&
+                  typeof value === "boolean"
+                )
+                  data[field][id] = value;
+                if (field === "checks" && record(value))
+                  data.checks[id] = value;
+              }
+            }
+          }
+          if (Array.isArray(saved.ideas))
+            data.ideas = saved.ideas.filter(
+              (value) => typeof value === "string",
+            );
+        }
+      } catch {}
+      let storageFailed = false;
+      let previewData;
+      let view = "road",
+        current = 0,
+        timer,
+        at = 0,
+        filters = { q: "", level: "", status: "" };
+      function save() {
+        try {
+          localStorage.setItem("edit-lab-v1", JSON.stringify(data));
+          storageFailed = false;
+        } catch {
+          storageFailed = true;
+        }
+        $("#storage").hidden = !storageFailed;
+        return !storageFailed;
+      }
+      function saveButton(i) {
+        return (
+          '<button data-save="' +
+          i +
+          '" aria-pressed="' +
+          !!data.saved[key(i)] +
+          '">' +
+          (data.saved[key(i)] ? "★ Saved" : "☆ Save") +
+          "</button>"
+        );
+      }
+      function card(l, i) {
+        return (
+          '<article class="card"><div class="cover" aria-hidden="true">' +
+          ["▣", "◈", "Aa", "♫"][i % 4] +
+          '</div><div class="meta"><small>WEEK ' +
+          String(i + 1).padStart(2, "0") +
+          " · " +
+          l[1] +
+          '</small><span class="status ' +
+          (data.done[key(i)] ? "done" : "") +
+          '">' +
+          (data.done[key(i)] ? "Completed" : "Pending") +
+          "</span></div><h3>" +
+          l[0] +
+          '</h3><p class="muted">' +
+          l[2] +
+          " · " +
+          (i === 11 ? "36 / 60" : l[3]) +
+          " sec · " +
+          l[4] +
+          '</p><div class="actions"><button class="primary" data-open="' +
+          i +
+          '">Project kholo →</button>' +
+          saveButton(i) +
+          "</div></article>"
+        );
+      }
+      function list() {
+        const hasFilters = filters.level || filters.status || filters.q.trim();
+        if (!hasFilters) {
+          $("#list").innerHTML = parts
+            .map(([level, title, subtitle]) => {
+              const cards = lessons
+                .map((l, i) => (l[1] === level ? card(l, i) : ""))
+                .join("");
+              const finished = lessons.filter(
+                (l, i) => l[1] === level && data.done[key(i)],
+              ).length;
+              return (
+                '<section class="part"><div class="part-head"><div><h3>' +
+                title +
+                "</h3><p>" +
+                subtitle +
+                '</p></div><span class="status">' +
+                finished +
+                ' / 4 complete</span></div><div class="grid">' +
+                cards +
+                "</div></section>"
+              );
+            })
+            .join("");
+          return;
+        }
+        let html = lessons
+          .map((l, i) =>
+            (!filters.level || l[1] === filters.level) &&
+            (!filters.status ||
+              (filters.status === "done") === !!data.done[key(i)]) &&
+            ("week " + (i + 1) + " " + l.join(" "))
+              .toLowerCase()
+              .includes(filters.q.trim().toLowerCase())
+              ? card(l, i)
+              : "",
+          )
+          .join("");
+        $("#list").innerHTML = html
+          ? '<div class="grid">' + html + "</div>"
+          : "<p>Koi project match nahi hua. Search ya filters badlo.</p>";
+      }
+      function render() {
+        clearInterval(timer);
+        timer = null;
+        at = 0;
+        document.querySelectorAll("[data-nav]").forEach((b) => {
+          const active = b.dataset.nav === (view === "lesson" ? "road" : view);
+          b.classList.toggle("active", active);
+          if (active) b.setAttribute("aria-current", "page");
+          else b.removeAttribute("aria-current");
+        });
+        const count = lessons.filter((_, i) => data.done[key(i)]).length;
+        const next = lessons.findIndex((_, i) => !data.done[key(i)]);
+        let body = "";
+        if (view === "road") {
+          body =
+            '<section class="hero"><div><div class="eyebrow">16 WEEKS / ' +
+            trackName().toUpperCase() +
+            " TRACK</div><h1>Chhote edits.<br><span>Badi skills.</span></h1><p>" +
+            (track === "phone"
+              ? "Phone ki Camera, Gallery aur editing app se shuru karo."
+              : "Computer par folder banana, media import karna aur timeline samajhna seekho.") +
+            ' Har hafte ek project banao aur Pro tak practice badhao.</p><button class="primary" data-open="' +
+            (next < 0 ? 0 : next) +
+            '">' +
+            (next < 0
+              ? "Week 1 dobara dekho"
+              : next === 0
+                ? "Week 1 shuru karo"
+                : "Week " + (next + 1) + " kholo") +
+            ' →</button></div><div class="art" aria-hidden="true"><small>WEEK 01 / PREVIEW</small><div class="screen"><div class="frame">MERA<br>PEHLA<br>EDIT</div></div><div class="tracks"><b>▣ VIDEO</b><b>Aa TEXT</b><b>♫ AUDIO</b></div></div></section><div class="stats"><div class="stat"><strong>' +
+            count +
+            " / " +
+            lessons.length +
+            '</strong><span>Projects complete</span><div class="progress" role="progressbar" aria-label="Completed projects" aria-valuenow="' +
+            count +
+            '" aria-valuemax="' +
+            lessons.length +
+            '"><b style="width:' +
+            (count / lessons.length) * 100 +
+            '%"></b></div></div><div class="stat"><strong>' +
+            (lessons.length - count) +
+            '</strong><span>Pending</span></div><div class="stat"><strong>' +
+            lessons.filter((_, i) => data.saved[key(i)]).length +
+            '</strong><span>Saved projects</span></div></div><div class="section"><h2>Weekly Roadmap</h2><div class="filters"><input id="query" type="search" aria-label="Search projects" placeholder="Search projects…" value="' +
+            esc(filters.q) +
+            '"><select id="level" aria-label="Difficulty"><option value="">All levels</option>' +
+            levels.map((x) => "<option>" + x + "</option>").join("") +
+            '</select><select id="status" aria-label="Project status"><option value="">All statuses</option><option value="pending">Pending</option><option value="done">Completed</option></select></div></div><div id="list" aria-live="polite"></div>';
+        }
+        if (view === "saved") {
+          body =
+            '<div class="section"><h2>Saved projects</h2></div><div class="grid">' +
+            (lessons
+              .map((l, i) => (data.saved[key(i)] ? card(l, i) : ""))
+              .join("") || "<p>Kisi project par ☆ Save dabao.</p>") +
+            '</div><section class="panel"><h2>Mere video ideas</h2><form id="idea"><input name="idea" aria-label="Naya idea" placeholder="Jaise desk makeover Reel" required maxlength="160"> <button class="primary">Idea save karo</button></form>' +
+            data.ideas
+              .map(
+                (x, i) =>
+                  "<p>" +
+                  esc(x) +
+                  ' <button data-remove="' +
+                  i +
+                  '">Hatao</button></p>',
+              )
+              .join("") +
+            "</section>";
+        }
+        if (view === "notes") {
+          body =
+            '<div class="section"><h2>Mere notes</h2></div>' +
+            (lessons
+              .map((l, i) =>
+                data.notes[key(i)]?.trim()
+                  ? '<article class="panel"><h3>Week ' +
+                    (i + 1) +
+                    " · " +
+                    l[0] +
+                    '</h3><p style="white-space:pre-wrap">' +
+                    esc(data.notes[key(i)]) +
+                    '</p><button data-open="' +
+                    i +
+                    '">Note edit karo</button></article>'
+                  : "",
+              )
+              .join("") ||
+              '<div class="panel">Kisi project ko kholo aur apna pehla note likho.</div>');
+        }
+        if (view === "lesson") body = lesson(current);
+        const switcher =
+          '<section class="device" aria-label="Editing device"><div><strong>Kis par edit karoge?</strong><div class="muted">Har track ka progress alag save hota hai.</div></div><div class="device-buttons"><button data-track="phone" aria-pressed="' +
+          (track === "phone") +
+          '">Phone</button><button data-track="pc" aria-pressed="' +
+          (track === "pc") +
+          '">PC</button></div></section>';
+        $("#app").innerHTML =
+          switcher +
+          '<p id="storage" role="alert" ' +
+          (storageFailed ? "" : "hidden") +
+          ">Browser mein save nahi ho paaya. Storage settings check karo.</p>" +
+          body;
+        if (view === "road") {
+          $("#level").value = filters.level;
+          $("#status").value = filters.status;
+          list();
+        }
+        if (view === "lesson") updatePreview();
+      }
+      function stamp(s) {
+        return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+      }
+      function animation(i, scene) {
+        if (scene === 5)
+          return {
+            type: "hold",
+            duration: 0.3,
+            label: "Last 0.3 sec fade out",
+          };
+        const type = [
+          "fade",
+          "pop",
+          "fade",
+          "pop",
+          "slide",
+          "fade",
+          "slide",
+          "mask",
+          "scale",
+          "fade",
+          "hold",
+          "pop",
+          "fade",
+          "fade",
+          "pop",
+          "pop",
+        ][i];
+        const duration = [
+          0.3, 0.2, 0.2, 0.2, 0.3, 0.4, 0.35, 0.5, 0.4, 0.3, 1, 0.2, 0.3, 0.2,
+          0.2, 0.2,
+        ][i];
+        if (i === 10)
+          return [
+            { type: "fade", duration: 0.2, label: "Fade 0.2 sec" },
+            { type: "pop", duration: 0.15, label: "Pop 0.15 sec" },
+            { type: "slide", duration: 0.6, label: "Slide 0.6 sec" },
+            { type: "hold", duration: 1, label: "Static hold" },
+            { type: "pop", duration: 0.2, label: "Pop 0.2 sec" },
+          ][scene];
+        if ((i === 11 || i === 15) && scene === 4)
+          return { type: "fade", duration: 0.4, label: "CTA fade 0.4 sec" };
+        const label =
+          i === 3
+            ? "Beat par pop 0.2 sec"
+            : i === 14
+              ? "Impact frame par pop 0.2 sec"
+              : type[0].toUpperCase() + type.slice(1) + " " + duration + " sec";
+        return { type, duration, label };
+      }
+      function lesson(i) {
+        let l = lessons[i],
+          titles = [l[6], ...l[7].split("|"), "Edit by me"],
+          ends =
+            i === 0
+              ? [0, 4, 11, 18, 25, 32, 36]
+              : [
+                  0,
+                  4,
+                  Math.round(l[3] * 0.3),
+                  Math.round(l[3] * 0.48),
+                  Math.round(l[3] * 0.68),
+                  l[3] - 4,
+                  l[3],
+                ],
+          horizontal = l[4] === "16:9",
+          size = horizontal ? "1920 × 1080" : "1080 × 1920";
+        previewData = { titles, ends, i };
+        let steps = [
+          "Phone ki Camera app kholo. Lens ko soft kapde se saaf karo. " +
+            (horizontal ? "Phone sideways pakdo." : "Phone seedha pakdo.") +
+            " " +
+            l[5] +
+            " ready rakho.",
+          l[8] +
+            (i === 0
+              ? " Camera mein video mode chuno, red Record dabao, action karo aur Stop dabao. Opening aur ending ke liye blank white paper ka shot bhi lo."
+              : "") +
+            " Har shot ko zaroorat se 2 sec lamba record karo.",
+          "Apni editing app kholo aur New Project banao. Gallery se clips select karke Add dabao. Canvas ya Ratio mein " +
+            (horizontal ? "16:9" : "9:16") +
+            " chuno.",
+          "Neeche wali timeline mein clips left se right arrange karo. Timeline video ka time dikhati hai. Playhead ko cut ki jagah le jao, Split dabao, aur extra tukda select karke Delete karo.",
+          l[9],
+          "Text → Add Text dabao. Storyboard se line type karo. Timeline mein text bar ke dono kinare kheench kar start aur end time set karo. " +
+            (i === 0
+              ? "Plain black text aur white background rakho. Fade option mile to use chuno."
+              : "Text motion ke liye timing column follow karo."),
+          "Play dabao. Phone par dekho ki har line padhne ke liye kaafi waqt hai. Awaz add ki hai to bina headphones bhi suno.",
+          "Export menu kholo. Practice target " +
+            size +
+            ", 30 fps aur MP4 rakho. File ka naam Week-" +
+            String(i + 1).padStart(2, "0") +
+            " rakho." +
+            (l[4].includes("+")
+              ? " Horizontal cut ko 1920 × 1080 mein alag export karo."
+              : ""),
+        ];
+        if (track === "pc") {
+          steps[0] =
+            "Footage phone ya camera se record karo. " +
+            (horizontal ? "Camera sideways rakho." : "Camera seedha rakho.") +
+            " " +
+            l[5] +
+            " ready rakho.";
+          steps[2] =
+            "Computer par Week-" +
+            String(i + 1).padStart(2, "0") +
+            " folder banao. Uske andar Footage, Audio aur Exports folders banao. USB ya file transfer se clips Footage mein copy karo. Editor kholo, New Project banao, Import dabao aur clips select karo.";
+          steps[3] =
+            "New Timeline ya Sequence banao. Size " +
+            size +
+            " aur 30 fps set karo. Media bin (clips ki list) se pehli clip timeline ke V1 video track par drag karo. Spacebar se play/pause karo. Playhead ko cut par rakho, Split ya Blade se kaato, extra tukda select karke Delete dabao.";
+          steps[4] += " PC par: " + pcPractice[i][0];
+          steps[5] =
+            "Titles ya Text panel se plain title timeline mein V1 ke upar rakho. Inspector ya Properties panel mein text likho, size aur position badlo. Clip ke left aur right edges drag karke storyboard ke times set karo. " +
+            (i === 0
+              ? "White background ke liye solid color layer use karo. Text black rakho."
+              : "Storyboard ki animation timing follow karo.");
+          steps[6] =
+            "Spacebar se poora playback dekho. Export ke baad MP4 ko computer par kholo. Vertical edit ho to phone par bhi text aur audio check karo.";
+          steps[7] =
+            "Export ya Render menu mein MP4 (H.264), " +
+            size +
+            " aur 30 fps select karo. Exports folder choose karke Export dabao." +
+            (l[4].includes("+")
+              ? " Horizontal version bhi 1920 × 1080 mein alag save karo."
+              : "");
+        }
+        return (
+          '<div class="section"><button data-nav="road">← Roadmap</button>' +
+          saveButton(i) +
+          '</div><div class="lesson"><div><section class="panel"><small>WEEK ' +
+          (i + 1) +
+          " / " +
+          trackName().toUpperCase() +
+          " / " +
+          l[1].toUpperCase() +
+          " / " +
+          l[2].toUpperCase() +
+          "</small><h1>" +
+          l[0] +
+          "</h1><p>" +
+          l[3] +
+          " sec · " +
+          l[4] +
+          (i === 11
+            ? " · 60-sec horizontal version"
+            : i === 15
+              ? " · 45 sec per version"
+              : "") +
+          " · " +
+          l[5] +
+          "</p>" +
+          (i === 0
+            ? "<details open><summary>Start yahan se · screen ko samjho</summary><p>" +
+              (track === "phone"
+                ? "Phone par ek video editor kholo. New Project se shuru karo. Gallery mein video milta hai. Preview upar dikhta hai aur neeche timeline mein clips left se right chalti hain. Timeline mein do ungliyon se zoom karke exact cut dekho."
+                : "Computer par ek video editor kholo. Media bin mein files aati hain, preview mein result dikhta hai aur timeline mein clips ka order banta hai. V1 pehle video track ka naam hai aur A1 pehle audio track ka. Editor ke hisaab se buttons ke naam thode alag ho sakte hain.") +
+              "</p></details>"
+            : "") +
+          "<details open><summary>1. Mini storyboard aur text timing</summary>" +
+          titles
+            .map(
+              (t, j) =>
+                '<div class="scene"><span class="time">' +
+                stamp(ends[j]) +
+                "–" +
+                stamp(ends[j + 1]) +
+                "</span><div><strong>" +
+                t +
+                '</strong><br><span class="muted">' +
+                (j === 0
+                  ? "Hook / opening shot"
+                  : j === 5
+                    ? "End card / final frame"
+                    : "Shot " + j) +
+                " · " +
+                animation(i, j).label +
+                "</span></div></div>",
+            )
+            .join("") +
+          '</details><details open><summary>2. Editing ke chhote steps</summary><ol class="steps">' +
+          steps.map((x) => "<li>" + x + "</li>").join("") +
+          "</ol>" +
+          (track === "pc"
+            ? "<p><strong>Practice target</strong> · " +
+              pcPractice[i][1] +
+              "</p>"
+            : "") +
+          "</details><details><summary>3. Thumbnail aur caption draft</summary><p><strong>Thumbnail</strong> · " +
+          l[10] +
+          ". Result shot select karo, title ko center ke paas rakho aur background ke opposite color ka text use karo.</p><p><strong>Caption</strong> · " +
+          l[11] +
+          "</p></details><details open><summary>4. Export checklist</summary>" +
+          checks
+            .concat(
+              l[4].includes("+")
+                ? [
+                    "Vertical aur horizontal dono MP4 files alag export aur review ki",
+                  ]
+                : [],
+            )
+            .map(
+              (x, j) =>
+                '<label class="check"><input type="checkbox" data-check="' +
+                j +
+                '" ' +
+                (data.checks[key(i)]?.[j] ? "checked" : "") +
+                "> " +
+                x +
+                "</label>",
+            )
+            .join("") +
+          '<button class="primary" id="complete">' +
+          (data.done[key(i)]
+            ? "↶ Pending mark karo"
+            : "✓ Completed mark karo") +
+          '</button> <span class="status ' +
+          (data.done[key(i)] ? "done" : "") +
+          '">' +
+          (data.done[key(i)] ? "Completed" : "Pending") +
+          '</span></details></section></div><aside><section class="panel"><small>TEXT TIMING PREVIEW</small><div class="preview" style="' +
+          (horizontal ? "aspect-ratio:16/9;width:100%" : "") +
+          '"><span id="preview-text"></span></div><div class="preview-controls"><button id="play" aria-label="Play preview">▶</button><input type="range" id="seek" aria-label="Preview time" min="0" max="' +
+          l[3] +
+          '" value="0" step="0.1"></div><p class="time" id="clock"></p></section><section class="panel"><label for="note"><strong>Project notes</strong></label><p class="muted">Kahan atke? Agli baar kya try karoge?</p><textarea id="note" rows="5" placeholder="Yahan likho…">' +
+          esc(data.notes[key(i)]) +
+          '</textarea><small id="note-status" role="status">Isi browser mein auto-save</small></section>' +
+          (i < lessons.length - 1
+            ? '<button data-open="' +
+              (i + 1) +
+              '">Week ' +
+              (i + 2) +
+              " dekho →</button>"
+            : "") +
+          "</aside></div>"
+        );
+      }
+      function updatePreview() {
+        const { titles, ends, i } = previewData;
+        const j = ends.findIndex((x, i) => i > 0 && at < x);
+        const scene = j < 0 ? titles.length - 1 : j - 1;
+        const node = $("#preview-text");
+        node.textContent = titles[scene];
+        const motion = animation(i, scene);
+        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const phase = reduced
+          ? 1
+          : Math.min(1, (at - ends[scene]) / motion.duration);
+        const eased = 1 - (1 - phase) ** 2;
+        node.style.opacity = reduced
+          ? "1"
+          : String(
+              scene === titles.length - 1
+                ? Math.min(1, (ends.at(-1) - at) / 0.3)
+                : motion.type === "hold" ||
+                    motion.type === "mask" ||
+                    motion.type === "scale"
+                  ? 1
+                  : phase,
+            );
+        node.style.transform =
+          motion.type === "slide"
+            ? "translateY(" + (1 - eased) * 22 + "px)"
+            : motion.type === "pop" || motion.type === "scale"
+              ? "scale(" +
+                (1 - (1 - eased) * (motion.type === "scale" ? 0.05 : 0.2)) +
+                ")"
+              : "none";
+        node.style.clipPath =
+          motion.type === "mask"
+            ? "inset(0 " + (1 - phase) * 100 + "% 0 0)"
+            : "none";
+        $("#seek").value = at;
+        $("#clock").textContent =
+          stamp(Math.floor(at)) + " / " + stamp(lessons[current][3]);
+      }
+      function go(v) {
+        view = v;
+        render();
+        window.scrollTo(0, 0);
+      }
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        if (b.dataset.track) {
+          if (track === b.dataset.track) return;
+          track = b.dataset.track;
+          filters = { q: "", level: "", status: "" };
+          try {
+            localStorage.setItem("edit-lab-device", track);
+          } catch {}
+          go(view === "lesson" ? "road" : view);
+          return;
+        }
+        if (b.dataset.nav) {
+          go(b.dataset.nav);
+          return;
+        }
+        if (b.dataset.open !== undefined) {
+          current = Number(b.dataset.open);
+          go("lesson");
+          return;
+        }
+        if (b.dataset.save !== undefined) {
+          let i = Number(b.dataset.save);
+          data.saved[key(i)] = !data.saved[key(i)];
+          if (view === "saved") render();
+          else {
+            b.textContent = data.saved[key(i)] ? "★ Saved" : "☆ Save";
+            b.setAttribute("aria-pressed", data.saved[key(i)]);
+            const stats = document.querySelector(".stat:last-child strong");
+            if (stats)
+              stats.textContent = lessons.filter(
+                (_, k) => data.saved[key(k)],
+              ).length;
+          }
+          save();
+          return;
+        }
+        if (b.dataset.remove !== undefined) {
+          data.ideas.splice(Number(b.dataset.remove), 1);
+          render();
+          save();
+          return;
+        }
+        if (b.id === "complete") {
+          data.done[key(current)] = !data.done[key(current)];
+          b.textContent = data.done[key(current)]
+            ? "↶ Pending mark karo"
+            : "✓ Completed mark karo";
+          b.nextElementSibling.textContent = data.done[key(current)]
+            ? "Completed"
+            : "Pending";
+          b.nextElementSibling.classList.toggle(
+            "done",
+            data.done[key(current)],
+          );
+          save();
+          return;
+        }
+        if (b.id === "play") {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+            b.textContent = "▶";
+            b.setAttribute("aria-label", "Play preview");
+            return;
+          }
+          if (at >= lessons[current][3]) {
+            at = 0;
+            updatePreview();
+          }
+          const start = performance.now() - at * 1000;
+          b.textContent = "Ⅱ";
+          b.setAttribute("aria-label", "Pause preview");
+          timer = setInterval(() => {
+            at = Math.min(
+              lessons[current][3],
+              (performance.now() - start) / 1000,
+            );
+            updatePreview();
+            if (at >= lessons[current][3]) b.click();
+          }, 80);
+        }
+      });
+      document.addEventListener("input", (e) => {
+        const x = e.target;
+        if (x.id === "query") {
+          filters.q = x.value;
+          list();
+        }
+        if (x.id === "note") {
+          data.notes[key(current)] = x.value;
+          $("#note-status").textContent = save()
+            ? "Note saved"
+            : "Note save nahi hua";
+        }
+        if (x.id === "seek") {
+          if (timer) $("#play").click();
+          at = Number(x.value);
+          updatePreview();
+        }
+      });
+      document.addEventListener("change", (e) => {
+        const x = e.target;
+        if (x.id === "level" || x.id === "status") {
+          filters[x.id] = x.value;
+          list();
+        }
+        if (x.dataset.check !== undefined) {
+          (data.checks[key(current)] ??= {})[x.dataset.check] = x.checked;
+          save();
+        }
+      });
+      document.addEventListener("submit", (e) => {
+        if (e.target.id === "idea") {
+          e.preventDefault();
+          let value = new FormData(e.target).get("idea").trim();
+          if (value) {
+            data.ideas.push(value);
+            render();
+            save();
+            $("#idea input").focus();
+          }
+        }
+      });
+      render();
+    </script>
+  </body>
+</html>
