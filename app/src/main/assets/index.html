@@ -565,7 +565,8 @@
           <button data-nav="road">Roadmap</button
           ><button data-nav="saved">Saved</button
           ><button data-nav="notes">Notes</button
-          ><button data-nav="studio">Studio</button>
+          ><button data-nav="studio">Studio</button
+          ><button data-nav="skills">Skills</button>
         </nav>
       </div>
     </header>
@@ -1357,6 +1358,559 @@
         );
       }
 
+      const skillLevels = ["Beginner", "Intermediate", "Advanced", "Pro"];
+      const skillTracks = [
+        [
+          "Basic editing",
+          [
+            [
+              "Cut, trim, split aur merge",
+              "Pencil, notebook aur white paper ke 3 shots",
+              "36-sec 9:16 MP4",
+              [
+                "New Project kholo. Teen clips import karo aur pencil → notebook → writing ke order mein rakho.",
+                "Pehli clip ka left edge kheench kar recording ki shuruaat hatao. Last edge se extra end hatao. Isko trim bolte hain.",
+                "Beech mein pause par playhead (time line) rakho. Split dabao, pause ke end par phir split karo. Beech ka tukda delete karo.",
+                "Clips ke beech khaali jagah hatao. Play karo. Ek MP4 export karoge to sab clips ek file mein jud jayengi.",
+              ],
+              "Timeline par do ungliyon se zoom karo. Clip tap karke Trim ya Split dhoondo.",
+              "Clips ko media bin se V1 par drag karo. Blade/Split se cut karo. Gap par Ripple Delete use karo.",
+              "Koi black gap nahi aur clip order sahi hai.",
+            ],
+            [
+              "Action ke beech clean cut",
+              "Notebook kholne ke wide aur close-up shots",
+              "20-sec match-on-action edit",
+              [
+                "Same action dono angles se record karo.",
+                "Wide shot ko us frame par kaato jahan notebook aadhi khuli hai.",
+                "Close-up ko usi action ke matching frame se shuru karo.",
+                "Cut ko ek frame aage ya peeche karke compare karo. Smooth version rakho.",
+              ],
+              "Timeline zoom karo. Close-up ko next clip ya overlay par rakho.",
+              "Viewer mein frame-step karo. V2 par close-up align karo aur rolling trim try karo.",
+              "Haath ya notebook cut par jump nahi karta.",
+            ],
+            [
+              "Selects se tight rough cut",
+              "1-minute demo ke 5 takes",
+              "45-sec rough cut aur 30-sec tight cut",
+              [
+                "Har take dekho. Best start, demo aur result ke timestamps likho.",
+                "Best sections story order mein rakho. Rough cut save karo.",
+                "Copy mein repeated lines aur pauses hatao. Explanation ke upar relevant close-up rakho.",
+                "Dono cuts dekho. Shorter cut mein zaroori step missing ho to wapas add karo.",
+              ],
+              "Duplicate Project use karo. Supporting shot overlay par rakho.",
+              "Selects aur Main sequences alag rakho. Mark In/Out aur ripple trim use karo.",
+              "30-sec edit samajh aata hai aur koi zaroori step gayab nahi.",
+            ],
+            [
+              "2-camera precision edit",
+              "2 camera angles aur ek mic track",
+              "60-sec dialogue MP4",
+              [
+                "Record ke start mein clap karo. Dono video angles aur mic waveform par clap peak dhoondo.",
+                "Teeno peaks ek frame par align karo. Camera audio mute karo.",
+                "Baat shuru hote hi har baar cut karne ki zaroorat nahi. Speaker, reaction aur pauses dekhkar angle choose karo.",
+                "Start, middle aur end par lip sync dekho. Drift ho to source frame rate check karo aur affected section dobara align karo.",
+              ],
+              "Angle B ko overlay par rakho. Jahan B chahiye wahi tukda visible rakho.",
+              "Multicam sequence banao ya V1/V2 use karo. Mic ko master audio rakho.",
+              "Angle switch par audio continuous aur lips synced hain.",
+            ],
+          ],
+        ],
+        [
+          "Audio",
+          [
+            [
+              "Voice aur background music",
+              "10-sec voice recording aur apna ya licensed music",
+              "20-sec voice + music mix",
+              [
+                "Quiet room mein phone ko paas rakhkar do voice takes record karo.",
+                "Best take import karo aur shuru/end ki extra silence trim karo.",
+                "Music alag layer par lagao. Volume kam karo jab tak har word clear ho.",
+                "Music ke start aur end par chhota fade lagao. Phone speaker par suno.",
+              ],
+              "Audio menu se voice import karo. Music clip tap karke Volume aur Fade set karo.",
+              "Voice A1 aur music A2 par rakho. Clip gain se balance set karo.",
+              "Music ke saath har word samajh aata hai.",
+            ],
+            [
+              "Sound effects, Foley aur ducking",
+              "Keys, footsteps aur bolti clip",
+              "30-sec scene mix",
+              [
+                "Action ke sounds alag record karo. Inhe Foley kehte hain.",
+                "Waveform zoom karo aur key ya step ka peak action frame par lagao.",
+                "Voice ke neeche music volume kam karo. Voice band ho to use thoda wapas badhao.",
+                "Cuts par harsh click aaye to tiny fade lagao. Final mix headphones aur speaker dono par suno.",
+              ],
+              "Music volume keyframes ya clip splits se neeche lao.",
+              "A1 dialogue, A2 Foley, A3 music. Fader automation ya volume keyframes use karo.",
+              "Sound action se match karta hai aur dialogue dabta nahi.",
+            ],
+            [
+              "Noise cleanup aur EQ",
+              "Fan wali voice recording aur quiet reference",
+              "Before/after comparison",
+              [
+                "Original duplicate karo. Dono copies same sunai dene wali volume par rakho.",
+                "Noise reduction halka lagao. Voice metallic lage to strength kam karo.",
+                "Low rumble ho to high-pass 70–100 Hz ke aas-paas try karo. Har voice par zaroori nahi.",
+                "EQ ek band chhote amount se badlo. Effect off/on karke clear version choose karo.",
+              ],
+              "Editor mein EQ/noise control check karo. Na mile to clip ko audio editor mein clean karke replace karo.",
+              "Noise reduction, high-pass aur EQ ko one by one bypass karke compare karo.",
+              "Noise kam hai aur voice natural hai.",
+            ],
+            [
+              "Compression aur loudness mastering",
+              "Soft aur loud lines wali recording",
+              "Final dialogue master aur before/after",
+              [
+                "Pehle clip gain se bahut loud ya quiet words close lao.",
+                "Compressor par 2:1 ya 3:1 ratio try karo. Threshold set karo jab loud lines par roughly 2–4 dB gain reduction ho.",
+                "Output gain se before/after equal volume par suno. Limiter ceiling around -1 dBTP rakho agar true-peak control available ho.",
+                "Integrated LUFS meter se poora export measure karo. Practice target -16 LUFS stereo try karo, phir re-export ko clipping aur speaker clarity ke liye check karo.",
+              ],
+              "Compressor aur LUFS meter wala audio editor use karo. Master WAV export karke video editor mein replace karo.",
+              "Dialogue bus par compressor, master par limiter aur loudness meter rakho. Meter reset karke full playback measure karo.",
+              "Voice steady hai, clipping nahi aur before/after volume matched hai.",
+            ],
+          ],
+        ],
+        [
+          "Text & captions",
+          [
+            [
+              "Readable title aur subtitles",
+              "10-sec speaking clip",
+              "20-sec captioned video",
+              [
+                "Text add karo. Contrast ke liye black-on-white ya white-on-dark try karo.",
+                "Playhead ko first word par rakho aur caption clip wahan start karo.",
+                "Sentence ko chhoti lines mein todo. Next sentence se pehle purana caption end karo.",
+                "Mute playback dekho aur spelling, reading time aur margins check karo.",
+              ],
+              "Text bar ke dono handles drag karo. Caption ko app buttons se upar rakho.",
+              "Captions panel ya title track use karo. Frame-step se start/end align karo.",
+              "Mute par captions padhkar baat samajh aati hai.",
+            ],
+            [
+              "Auto captions ko polish karo",
+              "30-sec voice tip",
+              "Corrected subtitles wala Reel",
+              [
+                "Auto captions available ho to language choose karke generate karo. Warna manually type karo.",
+                "Names, numbers aur mixed Hindi-English words voice se match karo.",
+                "Long line ko phrase break par split karo. Text ke liye same size aur position rakho.",
+                "3 sample timestamps scrub karo aur phir poora mute playback dekho.",
+              ],
+              "Har caption tap karke text edit aur timing adjust karo.",
+              "Caption panel mein errors search karo. Track style apply karke timing check karo.",
+              "Names sahi hain aur captions speech se sync hain.",
+            ],
+            [
+              "Kinetic typography",
+              "Chaar words ki voice recording",
+              "20-sec animated typography",
+              [
+                "Voice waveform par har word ka start mark karo.",
+                "Har word ko alag text clip banao. First frame par position neeche aur 0.3 sec baad center keyframe lagao.",
+                "Ease-out se smooth stop do. Ek important word ko scale pop do, baaki simple rakho.",
+                "Mute aur audio dono playback mein timing aur readability compare karo.",
+              ],
+              "Text select karke diamond keyframe tap karo. Agle frame par position badlo.",
+              "Position aur Scale channels use karo. Graph editor mein motion end smooth karo.",
+              "Words speech ke saath aate hain aur motion reading ko block nahi karta.",
+            ],
+            [
+              "SRT import, edit aur export",
+              "20-sec voice clip aur UTF-8 text editor",
+              "MP4 + captions.srt",
+              [
+                "Sample SRT copy karo. Number, start --> end, text aur blank line ka order rakho.",
+                "File UTF-8 mein captions.srt naam se save karo. Editor ya subtitle tool mein import karo.",
+                "Speech se timings match karo. Entries overlap na hon aur end time start se bada ho.",
+                "SRT ko alag export karo. Video player mein MP4 ke saath load karke check karo. Social video ke liye zaroorat ho to ek captions-burned copy bhi banao.",
+              ],
+              "Editor SRT support na kare to subtitle app mein SRT banao aur supported editor ya video player mein test karo.",
+              "Captions panel mein Import Captions use karo. Export mein Sidecar SRT choose karo.",
+              "MP4 aur SRT alag files hain aur captions correctly load hote hain.",
+            ],
+          ],
+        ],
+        [
+          "Transitions",
+          [
+            [
+              "Hard cut ya fade?",
+              "Desk setup ke 3 shots",
+              "20-sec edit with one fade",
+              [
+                "Shots ko order mein rakho. Dono clips seedhe milte hain to hard cut hota hai.",
+                "Pehle version mein sirf hard cuts rakho.",
+                "Ending par 0.3 sec fade out lagao. Start/end ka difference dekho.",
+                "Agar same action continue hai, simple cut rakho. Time ya mood change ho tab dissolve try karo.",
+              ],
+              "Clip join par transition button kholo. None aur Fade compare karo.",
+              "Timeline join par cut rakho. Ending clip par opacity fade ya Dip to Black lagao.",
+              "Fade ka ek clear purpose hai aur action cut clean hai.",
+            ],
+            [
+              "Dissolve, match cut aur whip",
+              "6 shots, do matching movements ke saath",
+              "25-sec three-transition comparison",
+              [
+                "Dissolve ke liye do shots ke edges par extra footage chhodo. 0.3 sec try karo.",
+                "Match cut mein dono frames ka object position ya shape match karo.",
+                "Whip cut ke liye dono clips mein same direction ki quick motion record karo. Blur ke beech cut lagao.",
+                "Teen versions compare karo aur note karo kaunsa scene change samajhne mein help karta hai.",
+              ],
+              "Transition duration slider se dissolve set karo. Whip manually trim karke test karo.",
+              "Clips mein handles verify karo. Match frame ke liye viewer guides use karo.",
+              "Whip direction match hai aur dissolve accidental freeze nahi banata.",
+            ],
+            [
+              "J-cut, L-cut aur audio bridge",
+              "Do speaking clips aur B-roll",
+              "30-sec conversation scene",
+              [
+                "J-cut mein next scene ki voice picture se pehle sunao. 0.3 sec se start karo.",
+                "L-cut mein current voice ko next picture par thoda chalne do.",
+                "Joins par room tone ya short crossfade lagao taaki silence jump na kare.",
+                "Aankh band karke sirf audio suno. Phir picture ke saath timing check karo.",
+              ],
+              "Extract Audio use karo. Audio ko clip se alag trim ya move karo.",
+              "Linked selection toggle karo ya split edit tools use karo. Audio handles par fades lagao.",
+              "Scene change natural lagta hai aur shabd cut nahi hote.",
+            ],
+            [
+              "Transition audit · overuse control",
+              "Ek rough Reel aur ek dialogue scene",
+              "Clean V2 aur cut decision notes",
+              [
+                "Har join par reason likho: action, time jump, place change ya emotion.",
+                "Sab flashy effects hata kar clean version dekho.",
+                "Sirf purposeful joins par best transition wapas lagao. Motion aur audio direction match karo.",
+                "V1/V2 ko kisi viewer ko dikhao. Confusing joins recut karo aur final export dekho.",
+              ],
+              "Duplicate projects rakho. Join effects ko None karke clean version compare karo.",
+              "Timeline duplicate karo. Transition points par markers aur reason labels lagao.",
+              "Har remaining transition ka clear reason bata sakte ho.",
+            ],
+          ],
+        ],
+        [
+          "Color grading",
+          [
+            [
+              "White balance aur exposure",
+              "White paper aur window-light clip",
+              "Before/after correction",
+              [
+                "Clip mein white paper ka neutral frame dhoondo.",
+                "Temperature aur tint thoda badlo jab tak paper natural lage.",
+                "Exposure adjust karo taaki subject clear ho aur bright detail bache.",
+                "Effect off/on compare karo. Phone brightness fixed rakhkar final dekho.",
+              ],
+              "Adjust menu mein Warmth, Tint aur Exposure use karo.",
+              "Color panel mein white balance aur waveform se highlight/shadow check karo.",
+              "Whites neutral aur subject details visible hain.",
+            ],
+            [
+              "Shot match aur consistent look",
+              "Warm, cool aur neutral lighting ke shots",
+              "30-sec matched scene",
+              [
+                "Natural reference frame choose karo aur save karo.",
+                "Baaki shots ko exposure, white balance aur contrast mein reference ke paas lao.",
+                "Cut points par skin aur whites dekho. Phir poore edit par halka shared look try karo.",
+                "Reference se compare karke saturation aur contrast overshoot hatao.",
+              ],
+              "Still screenshot ko reference rakho. Adjust settings copy karke per-shot fine tune karo.",
+              "Reference still/wipe aur waveform ya RGB parade use karo. Per-clip correction rakho.",
+              "Cut par noticeable color jump nahi.",
+            ],
+            [
+              "Log footage aur LUT workflow",
+              "Apne camera ka Log clip aur uska documented color profile",
+              "Corrected SDR before/after",
+              [
+                "Camera ya source se exact Log gamma aur color gamut note karo.",
+                "Editor mein input color transform ya matching technical LUT select karo. SDR output Rec.709 rakho.",
+                "Correction se exposure aur balance match karo. Transform already active ho to same LUT dobara mat lagao.",
+                "Creative LUT optional hai. Intensity kam karke skin aur highlights compare karo. Normal footage se practice kar rahe ho to Log transform skip karo.",
+              ],
+              "Color-managed ya custom LUT support wala editor use karo. Option na ho to PC track use karo.",
+              "Project color management ya input transform choose karo. Technical aur creative transforms alag rakho.",
+              "Log image natural SDR dikhti hai aur double transform nahi hai.",
+            ],
+            [
+              "Selective grade aur final check",
+              "Face/subject aur colored background wala shot",
+              "Matched graded scene",
+              [
+                "Base grade se poore shot ka balance sahi karo.",
+                "Color range qualifier ya mask se sirf subject/background ka area select karo.",
+                "Mask feather karo. Subject move ho to track ya keyframe karo. Chhota saturation ya exposure change do.",
+                "Edges, flicker aur skin check karo. Export ko neutral display aur phone par review karo.",
+              ],
+              "HSL selective controls ya feathered mask use karo. Moving area ke liye position keyframes lagao.",
+              "Separate node/layer par qualifier, matte refine aur tracking lagao. Scopes aur bypass check karo.",
+              "Selection edges clean hain aur grade playback par flicker nahi karta.",
+            ],
+          ],
+        ],
+        [
+          "Motion graphics",
+          [
+            [
+              "First animation · 2 keyframes",
+              "Plain background aur ek title",
+              "10-sec title reveal",
+              [
+                "Text add karo. Start par title ko thoda neeche rakho aur keyframe lagao.",
+                "0.3 sec baad title center mein move karo aur second keyframe lagao.",
+                "Playback dekho. Motion slow ho to keyframes paas lao.",
+                "Text ko hold karo taaki padhne ka time mile.",
+              ],
+              "Text selected ho to diamond icon tap karo. Playhead aage le jaakar text drag karo.",
+              "Inspector mein Position ke do keyframes set karo.",
+              "Title smooth move hota hai aur padhne ka waqt milta hai.",
+            ],
+            [
+              "Easing aur lower third",
+              "10-sec talking clip",
+              "Animated name strip",
+              [
+                "Naam aur rectangle alag layers par rakho.",
+                "Dono ko frame se bahar start karke 0.3 sec mein andar lao.",
+                "Ease-out select karo. Text ko 2 sec hold do aur 0.25 sec mein fade out.",
+                "Face cover na ho aur screen edge se margin ho.",
+              ],
+              "Group available ho to layers group karo. Warna same time par keyframes lagao.",
+              "Parent/group ya compound clip use karo. Graph editor se velocity smooth karo.",
+              "Strip jerk nahi karti aur face visible hai.",
+            ],
+            [
+              "Mask reveal aur tracking",
+              "Desk par moving object ya paper strip",
+              "Tracked label aur mask reveal",
+              [
+                "Object ke start par text ko paas rakho. Position keyframes ya tracker se object follow karo.",
+                "Movement direction badle to label ka offset check karo aur drift correct karo.",
+                "Text par rectangular mask lagao. Mask edge ko paper strip ke saath move karo.",
+                "Frame-step karke reveal aur tracking edges inspect karo.",
+              ],
+              "Auto tracking na ho to direction changes par manual keyframes lagao.",
+              "Tracker data label par apply karo. Mask feather aur keyframes adjust karo.",
+              "Text reveal sahi frame par hota hai aur label drift nahi karta.",
+            ],
+            [
+              "Compositing aur simple VFX",
+              "Static camera ka clean plate aur same frame mein moving hand",
+              "10-sec screen replacement ya object hide",
+              [
+                "Camera lock karke pehle empty shot (clean plate), phir action shot record karo.",
+                "Replacement layer ko screen corner ya object area par align karo. Perspective move ho to corner tracking use karo.",
+                "Moving hand ko foreground mask se isolate karo. Mask edges feather aur frame-by-frame correct karo.",
+                "Layer colors, shadow aur blur ko base shot se match karo. Before/after export karke edges inspect karo.",
+              ],
+              "Overlay, mask aur keyframes se static screen replace karo. Hand mask ke liye cutout ya manual mask support chahiye.",
+              "Layer order background → replacement → foreground rakho. Corner pin aur rotoscope mask use karo.",
+              "Hand replacement ke aage naturally dikhta hai aur edges jump nahi karte.",
+            ],
+          ],
+        ],
+        [
+          "Storytelling",
+          [
+            [
+              "Hook, action, result",
+              "Desk cleanup ke 3 shots",
+              "30-sec mini story",
+              [
+                "Before aur after shoot karo. Beech mein ek clear action record karo.",
+                "Pehle 3 sec mein problem ya result ki jhalak dikhao.",
+                "Main action ko order mein rakho. Extra repeats trim karo.",
+                "End par final result hold karo. Kisi viewer se poochho kya badla.",
+              ],
+              "Three clips arrange karo aur first clip par ek short hook line lagao.",
+              "Timeline markers par Hook, Action aur Result likho.",
+              "Viewer bina explanation ke change bata sakta hai.",
+            ],
+            [
+              "B-roll aur pacing",
+              "1-minute tutorial aur 4 close-ups",
+              "60-sec explain video",
+              [
+                "Voice ko setup, demo aur recap mein todo.",
+                "Jahan voice kisi cheez ka naam le, wahan relevant close-up lagao.",
+                "Repetitive lines hatao. Important result shot ko thoda hold do.",
+                "Ek baar bina sound aur ek baar bina screen ke dekho/suno. Missing detail add karo.",
+              ],
+              "Voice base par rakho aur B-roll overlay se add karo.",
+              "Voice-first timeline banao. V2 par B-roll aur section markers lagao.",
+              "Har B-roll shot ek detail samjhata hai.",
+            ],
+            [
+              "Long-form + do Shorts",
+              "8–12 minute tutorial ke takes aur result shots",
+              "Ek horizontal video + do vertical Shorts",
+              [
+                "Hook, setup, 3 chapters aur payoff ka outline likho.",
+                "Best speaking takes select karke rough cut banao. Redundant parts kaato.",
+                "Chapter breaks par title aur B-roll do. Weak section kisi viewer se check karwao.",
+                "Best result aur common mistake ke moments ko alag vertical projects mein reframe karo. Har Short ko own hook aur subtitles do.",
+              ],
+              "Full edit duplicate karo ya useful range export karke vertical project mein import karo.",
+              "Main timeline se select ranges do 9:16 sequences mein copy karo aur shot-by-shot reframe karo.",
+              "Long cut clear hai aur dono Shorts independently samajh aate hain.",
+            ],
+            [
+              "Mini documentary · narrative edit",
+              "Interview, location shots aur detail B-roll",
+              "5–8 minute mini documentary",
+              [
+                "Ek central question likho. Interview se 3–5 lines select karo jo beginning, change aur result banayein.",
+                "Pehle voice-only story cut banao. Factual order aur context check karo.",
+                "Location, action aur reaction shots add karo. Scene joins par natural audio bridge lagao.",
+                "Viewer se confusing moments ke timestamps lo. V2 mein recut karo, subtitles add karo aur final story check karo.",
+              ],
+              "Interview chunks ko labels ya notes mein mark karo. B-roll aur room tone overlays rakho.",
+              "Transcript/selects bins banao. Radio edit sequence se picture edit aur V2 duplicate banao.",
+              "Viewer central question aur end tak hua change bata sakta hai.",
+            ],
+          ],
+        ],
+      ];
+
+      let activeSkill = 0;
+      let activeSkillProject = 0;
+      const skillStorage = "edit-lab-skills-v1";
+      let skillProgress = {};
+      try {
+        const saved = JSON.parse(localStorage.getItem(skillStorage) || "{}");
+        if (saved && typeof saved === "object" && !Array.isArray(saved))
+          skillProgress = saved;
+      } catch {}
+      const skillKey = (category, project) =>
+        track + ":" + category + ":" + project;
+      const skillDone = (category, project) =>
+        skillProgress[skillKey(category, project)] === true;
+      function skillsPage() {
+        return (
+          '<div class="section"><h2>Skills</h2></div><p>Skill chuno. Uska Beginner project pehle karo, phir order mein Pro tak jao.</p><div class="grid">' +
+          skillTracks
+            .map(([name, projects], category) => {
+              const count = projects.filter((_, project) =>
+                skillDone(category, project),
+              ).length;
+              return (
+                '<article class="card"><h3>' +
+                name +
+                "</h3><p>" +
+                count +
+                " / " +
+                projects.length +
+                " complete · " +
+                trackName() +
+                '</p><button class="primary" data-skill="' +
+                category +
+                '" aria-label="' +
+                name +
+                ' ke projects kholo">Projects kholo →</button></article>'
+              );
+            })
+            .join("") +
+          "</div>"
+        );
+      }
+      function skillCategoryPage() {
+        const [name, projects] = skillTracks[activeSkill];
+        return (
+          '<div class="section"><button data-nav="skills">← Skills</button></div><h2>' +
+          name +
+          "</h2><p>" +
+          trackName() +
+          ' track · Neeche diye order mein practice karo.</p><div class="grid">' +
+          projects
+            .map(
+              ([title, , result], index) =>
+                '<article class="card"><div class="meta"><small>' +
+                skillLevels[index] +
+                '</small><span class="status' +
+                (skillDone(activeSkill, index) ? " done" : "") +
+                '">' +
+                (skillDone(activeSkill, index) ? "Completed" : "Pending") +
+                "</span></div><h3>" +
+                title +
+                "</h3><p>" +
+                result +
+                '</p><button class="primary" data-skill-project="' +
+                index +
+                '">Project kholo →</button></article>',
+            )
+            .join("") +
+          "</div>"
+        );
+      }
+      function skillProjectPage() {
+        const [name, projects] = skillTracks[activeSkill];
+        const [title, materials, result, steps, phone, pc, check] =
+          projects[activeSkillProject];
+        const completed = skillDone(activeSkill, activeSkillProject);
+        const srt =
+          activeSkill === 2 && activeSkillProject === 3
+            ? '<details open><summary>Copy karne ke liye sample SRT</summary><label for="srt-sample">Text select karo aur copy karo. Apni recording ke hisaab se time badlo.</label><textarea id="srt-sample" readonly rows="9" spellcheck="false">1\n00:00:00,500 --> 00:00:03,500\nAaj hum ek simple edit banayenge.\n\n2\n00:00:04,000 --> 00:00:07,000\nPehle clips ko sahi order mein rakho.\n</textarea></details>'
+            : "";
+        return (
+          '<section class="panel"><button data-skill="' +
+          activeSkill +
+          '">← ' +
+          name +
+          '</button><p class="muted">' +
+          skillLevels[activeSkillProject] +
+          " · " +
+          trackName() +
+          "</p><h1>" +
+          title +
+          "</h1><p><strong>Ready rakho</strong> · " +
+          materials +
+          "</p><p><strong>Final practice file</strong> · " +
+          result +
+          "</p>" +
+          '<details open><summary>1. Step by step</summary><ol class="steps">' +
+          steps.map((text) => "<li>" + text + "</li>").join("") +
+          "</ol></details>" +
+          "<details open><summary>2. " +
+          trackName() +
+          " par kaise karo</summary><p>" +
+          (track === "phone" ? phone : pc) +
+          '</p><p class="muted">Button names aur available features editor ke hisaab se badal sakte hain.</p></details>' +
+          srt +
+          "<details open><summary>3. Export aur check</summary><p>Apna result save ya export karo, phir shuru se end tak review karo.</p><p><strong>Pass check</strong> · " +
+          check +
+          '</p><button class="primary" data-skill-complete>' +
+          (completed ? "Pending mark karo" : "Completed mark karo") +
+          '</button> <span id="skill-status" class="status' +
+          (completed ? " done" : "") +
+          '" role="status">' +
+          (completed ? "Completed" : "Pending") +
+          "</span></details>" +
+          (activeSkillProject + 1 < projects.length
+            ? '<p><button data-skill-project="' +
+              (activeSkillProject + 1) +
+              '">Agla project →</button></p>'
+            : "") +
+          "</section>"
+        );
+      }
+
       function render() {
         clearInterval(timer);
         timer = null;
@@ -1368,7 +1922,9 @@
               ? "road"
               : view === "studio-lesson"
                 ? "studio"
-                : view);
+                : view.startsWith("skill")
+                  ? "skills"
+                  : view);
           b.classList.toggle("active", active);
           if (active) b.setAttribute("aria-current", "page");
           else b.removeAttribute("aria-current");
@@ -1454,6 +2010,9 @@
         if (view === "lesson") body = lesson(current);
         if (view === "studio") body = studioView();
         if (view === "studio-lesson") body = studioLesson();
+        if (view === "skills") body = skillsPage();
+        if (view === "skill-category") body = skillCategoryPage();
+        if (view === "skill-project") body = skillProjectPage();
         const switcher =
           '<section class="device" aria-label="Editing device"><div><strong>Kis par edit karoge?</strong><div class="muted">Har track ka progress alag save hota hai.</div></div><div class="device-buttons"><button data-track="phone" aria-pressed="' +
           (track === "phone") +
@@ -1767,6 +2326,33 @@
             localStorage.setItem("edit-lab-device", track);
           } catch {}
           go(view === "lesson" ? "road" : view);
+          return;
+        }
+        if (b.dataset.skill !== undefined) {
+          activeSkill = Number(b.dataset.skill);
+          go("skill-category");
+          return;
+        }
+        if (b.dataset.skillProject !== undefined) {
+          activeSkillProject = Number(b.dataset.skillProject);
+          go("skill-project");
+          return;
+        }
+        if (b.hasAttribute("data-skill-complete")) {
+          const id = skillKey(activeSkill, activeSkillProject);
+          const completed = !skillDone(activeSkill, activeSkillProject);
+          skillProgress[id] = completed;
+          const status = $("#skill-status");
+          try {
+            localStorage.setItem(skillStorage, JSON.stringify(skillProgress));
+            status.textContent = completed ? "Completed" : "Pending";
+          } catch {
+            status.textContent = "Browser mein save nahi hua";
+          }
+          status.classList.toggle("done", completed);
+          b.textContent = completed
+            ? "Pending mark karo"
+            : "Completed mark karo";
           return;
         }
         if (b.dataset.studio !== undefined) {
