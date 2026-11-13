@@ -42,7 +42,7 @@ public final class MainActivity extends Activity {
                 String path = uri.getPath();
                 if (request.isForMainFrame() && request.hasGesture()
                     && "https".equals(uri.getScheme()) && "github.com".equals(uri.getHost())
-                    && path != null && path.matches("/yunus-labs/edit-lab-android/releases/download/v[0-9.]+/[a-z-]+-(practice\\.zip|reference\\.mp4)")) {
+                    && path != null && path.matches("/yunus-labs/edit-lab-android/releases/download/v[0-9.]+/[a-z0-9-]+-(practice\\.zip|reference\\.mp4)")) {
                     try {
                         startActivity(new Intent(Intent.ACTION_VIEW, uri));
                     } catch (ActivityNotFoundException e) {
